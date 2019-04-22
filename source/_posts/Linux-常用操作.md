@@ -8,11 +8,15 @@ category:
     - DevOps
 ---
 
-# 时区
-1. 修改时区
+## 时区操作
+
+### 修改时区
+
 ```
 sudo unlink /etc/localtime
 sudo ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ```
+
 使用`ls /usr/share/zoneinfo`中查看所有支持的时区
-> https://unix.stackexchange.com/questions/110522/timezone-setting-in-linux
+
+> 参考 https://unix.stackexchange.com/questions/110522/timezone-setting-in-linux
