@@ -124,6 +124,8 @@ Then you can join any number of worker nodes by running the following on each as
 kubeadm join 172.31.4.168:6443 --token eo1f0z.ebu45svkllv7qfjb \
     --discovery-token-ca-cert-hash sha256:2f19ee235910c790325f781afffafd0532507cc4c0e9fe22203a92dfdbb021e2
 ```
+> 若此步报错`running with swap on is not supported. Please disable swap`, 则需要先关闭交换分区
+> 执行`lsblk`找到SWAP分区(如centos-swap), 执行`sudo swapoff /dev/mapper/centos-swap`管理交换分区
 
 如提示中所说，复制一份配置文件到自己的目录下
 ```
