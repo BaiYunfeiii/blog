@@ -180,3 +180,5 @@ Unable to connect to the server: x509: certificate signed by unknown authority (
 ```
 export KUBECONFIG=$HOME/.kube/config
 ```
+
+如果在join的时候，一直卡住，可能是因为被防火墙拦截了
