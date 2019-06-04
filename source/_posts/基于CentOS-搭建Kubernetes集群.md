@@ -182,3 +182,25 @@ export KUBECONFIG=$HOME/.kube/config
 ```
 
 如果在join的时候，一直卡住，可能是因为被防火墙拦截了
+
+3. 安装Fannel插件后，Node仍然一直NotReady
+查看所有Pod的状态
+```
+[kube@kube-master01 ~]$ kubectl get pods --all-namespaces -o wide
+NAMESPACE     NAME                                          READY   STATUS                  RESTARTS   AGE   IP                NODE                  NOMINATED NODE   READINESS GATES
+kube-system   coredns-fb8b8dccf-8tvln                       1/1     Running                 0          69m   10.244.0.7        kube-master01.local   <none>           <none>
+kube-system   coredns-fb8b8dccf-gs96w                       1/1     Running                 0          69m   10.244.0.6        kube-master01.local   <none>           <none>
+kube-system   etcd-kube-master01.local                      1/1     Running                 0          68m   192.168.199.201   kube-master01.local   <none>           <none>
+kube-system   kube-apiserver-kube-master01.local            1/1     Running                 0          68m   192.168.199.201   kube-master01.local   <none>           <none>
+kube-system   kube-controller-manager-kube-master01.local   1/1     Running                 0          68m   192.168.199.201   kube-master01.local   <none>           <none>
+kube-system   kube-flannel-ds-amd64-2nzmd                   1/1     Running                 0          65m   192.168.199.201   kube-master01.local   <none>           <none>
+kube-system   kube-flannel-ds-amd64-s6bd6                   0/1     Init:ImagePullBackOff   0          64m   192.168.199.203   kube-node02.local     <none>           <none>
+kube-system   kube-proxy-4pl7v                              1/1     Running                 0          69m   192.168.199.201   kube-master01.local   <none>           <none>
+kube-system   kube-proxy-bddlv                              1/1     Running                 0          42m   192.168.199.203   kube-node02.local     <none>           <none>
+kube-system   kube-scheduler-kube-master01.local            1/1     Running                 0          68m   192.168.199.201   kube-master01.local   <none>           <none>
+```
+发现有Pod不是正常的Running状态。查看一下Pod的详情
+```
+kubectl describe pod kube-flannel-ds-amd64-s6bd6 -n kube-system
+``` 
+可以发现是拉取镜像出现问题，把镜像问题解决后，pod就能正常Running了
