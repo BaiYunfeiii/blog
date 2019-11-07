@@ -204,3 +204,4 @@ kube-system   kube-scheduler-kube-master01.local            1/1     Running     
 kubectl describe pod kube-flannel-ds-amd64-s6bd6 -n kube-system
 ``` 
 可以发现是拉取镜像出现问题，把镜像问题解决后，pod就能正常Running了
+EADUYERHEYHKIDLR
